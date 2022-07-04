@@ -1,12 +1,15 @@
 <template>
     <div>
          <div class="home-search-filters">
-            <select>
-                <option>Select a Country </option>
-                <option>Australia </option>
-                <option>United States of the America </option>
+            <select id="selectCountry">
+                <option value="">Select a Country </option>
+                <option value="au">Australia </option>
+                <option value="hk">Hong Kong </option>
+                <option value="ph">Philippines </option>
+                <option value="sk">South Korea </option>
+                <option value="us">United States of the America </option>
             </select>
-            <select>
+            <select id="selectCategory">
                 <option value="">Select a Category </option>
                 <option value="business">Business </option>
                 <option value="entertainment">Entertainment </option>
@@ -17,8 +20,8 @@
                 <option value="technology">Technology </option>
             </select>
             <input type="text" placeholder="Search" id="inputsearch">
-            <button id="btnSearchNews">Search</button>
-            <button id="btnSearchClear">Clear</button>
+            <button @click="searchNews" id="btnSearchNews">Search</button>
+            <button @click="clearAllFilters" id="btnSearchClear">Clear</button>
         </div>
 
         <div v-if="news && news.length" class="data-table-container">
@@ -39,6 +42,9 @@
                     <p>Published at: {{moment(post.publishedAt).format('YYYY-MM-DD hh:mm')}}</p>
                 </div>
             </div>
+        </div>
+        <div v-else class="data-table-totalresults">
+            <p> No results found. </p>
         </div>
 
     </div>
@@ -69,6 +75,30 @@ import axios from 'axios';
             .catch(e => {
             this.errors.push(e)
             })
+        },
+
+        methods: {
+            clearAllFilters() {
+                document.getElementById("inputsearch").value = "";
+                document.getElementById("selectCategory").value = "";
+                document.getElementById("selectCountry").value = "";
+            },
+            searchNews() {
+                var selectedCountry = document.getElementById("selectCountry").value;
+                var selectedCategory = document.getElementById("selectCategory").value;
+                var inputKeyword = document.getElementById("inputsearch").value;
+
+                axios.get(`https://newsapi.org/v2/top-headlines?country=${selectedCountry}&category=${selectedCategory}&q=${inputKeyword}&apiKey=d2e5c70185754ff0aa63e3d65fc5163a`)
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    this.news = response.data.articles
+                    this.totalResult = response.data.totalResults
+                    console.log(response)
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+            }
         }
     };
 </script>

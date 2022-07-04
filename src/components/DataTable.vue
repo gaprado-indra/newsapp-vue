@@ -1,22 +1,46 @@
 <template>
-    <div v-if="news && news.length" class="data-table-container">
-        <div class="data-table-totalresults">
-            <p>{{totalResult}} News Result(s)</p>
+    <div>
+         <div class="home-search-filters">
+            <select>
+                <option>Select a Country </option>
+                <option>Australia </option>
+                <option>United States of the America </option>
+            </select>
+            <select>
+                <option value="">Select a Category </option>
+                <option value="business">Business </option>
+                <option value="entertainment">Entertainment </option>
+                <option value="general">General </option>
+                <option value="health">Health </option>
+                <option value="science">Science </option>
+                <option value="sports">Sports </option>
+                <option value="technology">Technology </option>
+            </select>
+            <input type="text" placeholder="Search" id="inputsearch">
+            <button id="btnSearchNews">Search</button>
+            <button id="btnSearchClear">Clear</button>
         </div>
-        <div v-for="post of news" :key="post.id" class="individual-news">
-            <div class="news-image-container">
-                <img alt="news logo" :src="post.urlToImage" />
+
+        <div v-if="news && news.length" class="data-table-container">
+            <div class="data-table-totalresults">
+                <p>{{totalResult}} News Result(s)</p>
             </div>
-            <div class="news-details-container">
-                <p>{{post.title}}</p>
-                <p>{{post.author}}</p>
-                <p>{{post.description}}</p>
-                <a :href="post.url"><button>GO TO PAGE</button></a>
-            </div>
-            <div class="news-detail-publisheddate">
-                <p>Published at: {{moment(post.publishedAt).format('YYYY-MM-DD hh:mm')}}</p>
+            <div v-for="post of news" :key="post.id" class="individual-news">
+                <div class="news-image-container">
+                    <img alt="news logo" :src="post.urlToImage" />
+                </div>
+                <div class="news-details-container">
+                    <p>{{post.title}}</p>
+                    <p>{{post.author}}</p>
+                    <p>{{post.description}}</p>
+                    <a :href="post.url"><button>GO TO PAGE</button></a>
+                </div>
+                <div class="news-detail-publisheddate">
+                    <p>Published at: {{moment(post.publishedAt).format('YYYY-MM-DD hh:mm')}}</p>
+                </div>
             </div>
         </div>
+
     </div>
 </template>
 

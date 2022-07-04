@@ -69,6 +69,10 @@ body {
     align-items: center;
 }
 
+.home-search-filters select, input, button {
+    margin-right: 10px;
+}
+
 /**NEWS SECTION**/
 .data-table-container {
     background-color: #cccccc;

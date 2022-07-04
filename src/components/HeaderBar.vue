@@ -1,7 +1,7 @@
 <template>
     <div class="main-nav-bar">
         <span class="text-white-large">
-            NEWS TODAY
+            React News Search & Bookmark
         </span>
     </div>
 </template>

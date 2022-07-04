@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="homepage-container">
         <search-filters></search-filters>
         <data-table></data-table>
     </div>

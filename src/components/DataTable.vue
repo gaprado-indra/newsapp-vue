@@ -33,7 +33,7 @@
                     <p>{{post.title}}</p>
                     <p>{{post.author}}</p>
                     <p>{{post.description}}</p>
-                    <a :href="post.url"><button>GO TO PAGE</button></a>
+                    <a :href="post.url"><button>Go To Page</button></a>
                 </div>
                 <div class="news-detail-publisheddate">
                     <p>Published at: {{moment(post.publishedAt).format('YYYY-MM-DD hh:mm')}}</p>

@@ -3,7 +3,7 @@
         <div class="data-table-totalresults">
             <p>{{totalResult}} News Result(s)</p>
         </div>
-        <div v-for="post of news" :key="post" class="individual-news">
+        <div v-for="post of news" :key="post.id" class="individual-news">
             <div class="news-image-container">
                 <img alt="news logo" :src="post.urlToImage" />
             </div>

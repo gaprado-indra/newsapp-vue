@@ -33,7 +33,7 @@
                     <img alt="news logo" :src="post.urlToImage" />
                 </div>
                 <div class="news-details-container">
-                    <p>{{post.title}}</p>
+                    <p @click="viewNewsDetail(post.id)">{{post.title}}</p>
                     <p>{{post.author}}</p>
                     <p>{{post.description}}</p>
                     <a :href="post.url"><button>Go To Page</button></a>
@@ -47,6 +47,8 @@
             <p> No results found. </p>
         </div>
 
+
+        <!-- Modal for viewwing news details -->
     </div>
 </template>
 
@@ -67,13 +69,12 @@ import axios from 'axios';
         created() {
             axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=d2e5c70185754ff0aa63e3d65fc5163a`)
             .then(response => {
-            // JSON responses are automatically parsed.
-            this.news = response.data.articles
-            this.totalResult = response.data.totalResults
-            console.log(response)
+                this.news = response.data.articles
+                this.totalResult = response.data.totalResults
+                console.log(response)
             })
             .catch(e => {
-            this.errors.push(e)
+                this.errors.push(e)
             })
         },
 
@@ -90,7 +91,6 @@ import axios from 'axios';
 
                 axios.get(`https://newsapi.org/v2/top-headlines?country=${selectedCountry}&category=${selectedCategory}&q=${inputKeyword}&apiKey=d2e5c70185754ff0aa63e3d65fc5163a`)
                 .then(response => {
-                    // JSON responses are automatically parsed.
                     this.news = response.data.articles
                     this.totalResult = response.data.totalResults
                     console.log(response)
@@ -98,6 +98,9 @@ import axios from 'axios';
                 .catch(e => {
                     this.errors.push(e)
                 })
+            },
+            viewNewsDetail(id) {
+                alert("THIS NEWS ID " + id)
             }
         }
     };
